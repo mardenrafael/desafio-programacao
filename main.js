@@ -29,17 +29,22 @@ function filterByAtrr(objectToFilter, attrsToSearch, attrsValues) {
     }
 
 
+
     if (filteredArray.length == 0) {
         
         return `Nada foi encontrado com o filtro: ${attrsValues}\nTente outro filtro`
     } else {
 
-        return filteredArray
+        const filteredArrayWithoutDuplicates = filteredArray.filter((element, idx) => {
+            return filteredArray.indexOf(element) == idx;
+        })
+
+        return filteredArrayWithoutDuplicates
     }
 }
    
 
 
-let resp = filterByAtrr(peoples, ["estado", "sexo"], ["RJ"])
+let resp = filterByAtrr(peoples, ["estado", "sexo"], ["RO"])
 
 console.log(resp);
