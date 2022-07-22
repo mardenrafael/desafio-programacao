@@ -1,5 +1,31 @@
 const peoples = require("./pessoas.json");
+const readline = require("readline");
+const { exit } = require("process");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
+
+rl.question("Insira os atributos a serem pesquisados (separados por espaços em branco)\n", (answer) => {
+    const filter = answer.split(" ");
+
+    rl.question("Insira os valores a serem procurados nos atributos (separados por espaços em branco)\n", (answer) => {
+        const filterValues = answer.split(" ");
+
+        let resp = filterByAtrr(peoples, filter, filterValues);
+
+        console.log(resp);
+
+        rl.close()
+    }) 
+})
+
+
+rl.on("close", () => {
+    
+    exit(1)
+})
 
 /**
  * @param objectToFilter Array de objetos para ser filtrado
@@ -45,6 +71,6 @@ function filterByAtrr(objectToFilter, attrsToSearch, attrsValues) {
    
 
 
-let resp = filterByAtrr(peoples, ["estado", "sexo"], ["RO"])
+// let resp = filterByAtrr(peoples, ["estado", "sexo"], ["RO"])
 
-console.log(resp);
+// console.log(resp);
